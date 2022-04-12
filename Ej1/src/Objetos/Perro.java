@@ -1,50 +1,34 @@
 package Objetos;
 
+import Enum.NewEnum;
+
 public class Perro {
 
-    private String raza, nombre;
-
-    private int edad;
-
-    private float tamano;
+    private NewEnum nombre;
+    private int numero;
 
     public Perro() {
     }
 
-    public String getNombre() {
-        return nombre;
-    }
-
-    public int getEdad() {
-        return edad;
-    }
-
-    public String getRaza() {
-        return raza;
-    }
-
-    public float isTamano() {
-        return tamano;
-    }
-
-    public void setNombre(String nombre) {
+    public Perro(NewEnum nombre) {
         this.nombre = nombre;
     }
 
-    public void setEdad(int edad) {
-        this.edad = edad;
+    public int getNumero() {
+        return numero;
     }
 
-    public void setRaza(String raza) {
-        this.raza = raza;
+    public NewEnum getNombre() {
+        return nombre;
     }
 
-    public void setTamano(float tamano) {
-        this.tamano = tamano;
+    public void setNombre(NewEnum nombre) {
+        this.nombre = nombre;
     }
 
     @Override
     public String toString() {
-        return "Perro{" + "raza=" + raza + ", nombre=" + nombre + ", edad=" + edad + ", tama�o=" + tamano + '}';
+        return "Perro{" + nombre + '}';
     }
+
 }

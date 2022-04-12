@@ -3,16 +3,21 @@ package objetos;
 public class carta {
 
     private Integer número;
-    private String palo;
+    private Palo palo;
 
     public carta() {
+    }
+
+    public carta(Integer número, Palo palo) {
+        this.número = número;
+        this.palo = palo;
     }
 
     public Integer getNúmero() {
         return número;
     }
 
-    public String getPalo() {
+    public Palo getPalo() {
         return palo;
     }
 
@@ -20,7 +25,7 @@ public class carta {
         this.número = número;
     }
 
-    public void setPalo(String palo) {
+    public void setPalo(Palo palo) {
         this.palo = palo;
     }
 

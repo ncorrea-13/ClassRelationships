@@ -6,69 +6,46 @@ import java.util.Scanner;
 
 public class mazo {
 
-    private ArrayList<carta> mazo, jugadores;
-    private Integer numero;
-    private Scanner leer;
+    private MazoNuevo mazoNuevo, cartasEntregadas;
+    private final Scanner leer;
+    private carta carta;
 
     public mazo() {
-        mazo = new ArrayList();
-        jugadores = new ArrayList();
-        leer = new Scanner(System.in);
+        leer = new Scanner(System.in).useDelimiter("\n");
+        mazoNuevo = new MazoNuevo();
+        cartasEntregadas = new MazoNuevo();
     }
 
     public void crearBaraja() {
-        for (int j = 0; j < 4; j++) {
-            for (int i = 1; i < 11; i++) {
-                carta cartaNueva = new carta();
-                switch (i) {
-                    case 8:
-                        cartaNueva.setNúmero(10);
-                        break;
-                    case 9:
-                        cartaNueva.setNúmero(11);
-                        break;
-                    case 10:
-                        cartaNueva.setNúmero(12);
-                        break;
-                    default:
-                        cartaNueva.setNúmero(i);
-                        break;
+        ArrayList<carta> salida = new ArrayList();
+        ArrayList<carta> entrada = new ArrayList();
+        cartasEntregadas.setCarta(entrada);
+        for (Palo aux : Palo.values()) {
+            for (int i = 1; i < 13; i++) {
+                if (i == 8 || i == 9) {
+
+                } else {
+                    carta nueva = new carta(i, aux);
+                    salida.add(nueva);
                 }
-                System.out.println(i);
-                switch (j) {
-                    case 0:
-                        cartaNueva.setPalo("oro");
-                        break;
-                    case 1:
-                        cartaNueva.setPalo("copa");
-                        break;
-                    case 2:
-                        cartaNueva.setPalo("basto");
-                        break;
-                    case 3:
-                        cartaNueva.setPalo("espada");
-                        break;
-                }
-                mazo.add(cartaNueva);
             }
         }
+        mazoNuevo.setCarta(salida);
     }
 
     public void barajar() {
-        Collections.shuffle(mazo);
+        Collections.shuffle(mazoNuevo.getCarta());
     }
 
     public void siguienteCarta() {
-        carta nuevas = mazo.get(0);
-        mazo.remove(0);
-        jugadores.add(nuevas);
+        System.out.println("La siguiente carta es la " + mazoNuevo.getCarta().get(0).toString());
     }
 
     public void cartasDisponibles() {
-        if (mazo.isEmpty()) {
+        if (mazoNuevo.getCarta().isEmpty()) {
             System.out.println("No quedan cartas disponibles");
         } else {
-            System.out.println("Quedan " + mazo.size() + " cartas disponibles");
+            System.out.println("Quedan " + mazoNuevo.getCarta().size() + " cartas disponibles");
         }
     }
 
@@ -78,39 +55,38 @@ public class mazo {
         System.out.println("Cuántas cartas desea entregar?");
         int cantidad = leer.nextInt();
 
-        if (mazo.isEmpty()) {
+        if (mazoNuevo.getCarta().isEmpty()) {
             System.out.println("no hay más cartas en el mazo");
 
-        } else if (cantidad > mazo.size()) {
+        } else if (cantidad > mazoNuevo.getCarta().size()) {
             System.out.println("Usted está pidiendo más cartas de las que hay");
 
         } else {
             for (int i = 0; i < cantidad; i++) {
-                nuevas = mazo.get(i);
-                mazo.remove(i);
-                jugadores.add(nuevas);
+                nuevas = mazoNuevo.getCarta().get(i);
+                mazoNuevo.getCarta().remove(i);
+                cartasEntregadas.getCarta().add(nuevas);
             }
         }
     }
 
     public void cartasMonton() {
         carta nueva;
-        if (jugadores.isEmpty()) {
+        if (cartasEntregadas.getCarta().isEmpty()) {
             System.out.println("están todas las cartas en el mazo");
         } else {
-            for (int i = 0; i < jugadores.size(); i++) {
-                nueva = jugadores.get(i);
-                jugadores.remove(i);
-                mazo.add(nueva);
+            for (int i = 0; i < cartasEntregadas.getCarta().size(); i++) {
+                nueva = cartasEntregadas.getCarta().get(i);
+                mazoNuevo.getCarta().add(nueva);
             }
         }
     }
 
     public void mostrarBaraja() {
-        mazo.forEach((mazo1) -> {
+        mazoNuevo.getCarta().forEach((mazo1) -> {
             System.out.println(mazo1.toString());
         });
-        
+
     }
 
 }
