@@ -5,17 +5,13 @@ import Enum.NewEnum;
 public class Perro {
 
     private NewEnum nombre;
-    private int numero;
+    private Persona dueno;
 
     public Perro() {
     }
 
     public Perro(NewEnum nombre) {
         this.nombre = nombre;
-    }
-
-    public int getNumero() {
-        return numero;
     }
 
     public NewEnum getNombre() {
@@ -26,9 +22,17 @@ public class Perro {
         this.nombre = nombre;
     }
 
+    public void setDueno(Persona dueno) {
+        this.dueno = dueno;
+    }
+
+    public Persona getDueno() {
+        return dueno;
+    }
+
     @Override
     public String toString() {
-        return "Perro{" + nombre + '}';
+        return "Perro=" + nombre;
     }
 
 }

@@ -6,7 +6,6 @@ import java.util.Scanner;
 public class Persona {
 
     private final Scanner leer = new Scanner(System.in);
-    ;
     private String nombre;
     private Perro perro;
 
@@ -18,12 +17,12 @@ public class Persona {
         this.nombre = nombre;
     }
 
+    public void setPerro(Perro perro) {
+        this.perro = perro;
+    }
+    
     public String getNombre() {
         return nombre;
-    }
-
-    public Perro getPerro() {
-        return perro;
     }
 
     public Persona crearPersona() {
@@ -35,7 +34,7 @@ public class Persona {
     }
 
     public Perro crearPerro(int i) {
-        switch (i){
+        switch (i) {
             case 0:
                 perro = new Perro(NewEnum.CHOLO);
                 break;
@@ -52,15 +51,18 @@ public class Persona {
                 perro = new Perro(NewEnum.TUKI);
                 break;
         }
+        perro.setDueno(null);
         return perro;
     }
-    
-    public void elegirPerro(){
-        
+
+    public void elegirPerro(Perro perro) {    
+        setPerro(perro);
     }
 
     @Override
     public String toString() {
-        return "Persona{" + "nombre=" + nombre + perro.toString() + '}';
+        return "Persona{" + "nombre=" + nombre + ", " + perro + '}';
     }
+    
+    
 }
